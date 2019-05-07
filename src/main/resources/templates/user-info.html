@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header>
+    <h1>User Info</h1>
+</header>
+<main>
+
+    <p th:text="'Username:' + ${user.username}"/>
+    <p th:text="'Password:' + ${user.password}"/>
+    <p th:text="'First Name:' + ${user.firstName}"/>
+    <p th:text="'Last Name:' + ${user.lastName}"/>
+    <p th:text="'Date of Birth:' + ${user.dateOfBirth}"/>
+    <p th:text="'Bio:' + ${user.bio}"/>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>
