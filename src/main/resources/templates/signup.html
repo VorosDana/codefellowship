@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header>
+    <h1>Signup</h1>
+</header>
+<main>
+    <form action="/signup" method="post">
+        <input type="text" required name="username" placeholder="Username"/>
+        <input type="password" required name="password" placeholder="Password"/>
+        <input type="text" required name="firstName" placeholder="First Name"/>
+        <input type="text" required name="lastName" placeholder="Last Name"/>
+        <input type="date" required name="dateOfBirth" placeholder="Username"/>
+        <input type="text" required name="bio" placeholder="Bio"/>
+        <button type="submit">Submit</button>
+    </form>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>
