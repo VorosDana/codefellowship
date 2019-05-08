@@ -3,10 +3,8 @@ package com.example.codefellowship.database;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -24,7 +22,11 @@ public class ApplicationUser implements UserDetails {
     private String dateOfBirth;
     private String bio;
 
+    @OneToMany
+    private List<Post> posts;
+
     @java.lang.Override
+
     public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
