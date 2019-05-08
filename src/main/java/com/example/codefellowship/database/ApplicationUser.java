@@ -22,7 +22,7 @@ public class ApplicationUser implements UserDetails {
     private String dateOfBirth;
     private String bio;
 
-    @OneToMany
+    @OneToMany(mappedBy = "poster")
     private List<Post> posts;
 
     @java.lang.Override
@@ -107,5 +107,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

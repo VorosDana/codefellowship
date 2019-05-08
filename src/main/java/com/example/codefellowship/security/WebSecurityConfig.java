@@ -43,7 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login*").permitAll()
                 .antMatchers("/signup*").permitAll()
                 .antMatchers("/style.css").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated()
 
                 .and()
                 .formLogin()
@@ -54,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
-                .logoutUrl("perform_logout")
+                .logoutUrl("/perform_logout")
                 .logoutSuccessUrl("/login")
                 .deleteCookies("JSESSIONID");
     }

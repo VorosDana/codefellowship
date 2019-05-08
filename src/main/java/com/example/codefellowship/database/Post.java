@@ -16,7 +16,7 @@ public class Post {
     private Date createdAt;
 
     @ManyToOne
-    private ApplicationUser poster;
+    public ApplicationUser poster;
 
     public String getBody() {
         return body;
@@ -40,5 +40,13 @@ public class Post {
 
     public void setPoster(ApplicationUser poster) {
         this.poster = poster;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

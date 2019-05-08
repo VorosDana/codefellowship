@@ -2,5 +2,5 @@ package com.example.codefellowship.database;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PostRepository extends JpaRepository<Post, long> {
+public interface PostRepository extends JpaRepository<Post, Long> {
 }

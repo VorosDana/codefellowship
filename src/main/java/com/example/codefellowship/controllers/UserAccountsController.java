@@ -3,13 +3,16 @@ package com.example.codefellowship.controllers;
 import com.example.codefellowship.UserNotFoundException;
 import com.example.codefellowship.database.ApplicationUser;
 import com.example.codefellowship.database.ApplicationUserRepository;
+import com.example.codefellowship.database.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -17,6 +20,9 @@ import java.util.Optional;
 public class UserAccountsController {
     @Autowired
     ApplicationUserRepository userRepository;
+
+    @Autowired
+    PostRepository postRepo;
 
     @Autowired
     PasswordEncoder encoder;
@@ -54,7 +60,9 @@ public class UserAccountsController {
     }
 
     @GetMapping("")
-    public String getSplashPage() {
+    public String getSplashPage(@AuthenticationPrincipal ApplicationUser user, Model model) {
+        model.addAttribute("user", user);
+
         return "splash";
     }
 
@@ -68,5 +76,16 @@ public class UserAccountsController {
         }
 
         throw new UserNotFoundException();
+    }
+
+    @GetMapping("/userpanel")
+    public String getUserPanel(@AuthenticationPrincipal ApplicationUser user, Model model) {
+        ApplicationUser intermediary = userRepository.findByUsername(user.getUsername());
+
+        model.addAttribute("user", intermediary);
+//        List posts = user.getPosts();
+        model.addAttribute("posts", intermediary.getPosts());
+
+        return "userPanel";
     }
 }
