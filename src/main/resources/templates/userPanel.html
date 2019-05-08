@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Code Fellowship</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header>
+    <div th:replace="~{common :: navbar}"></div>
+</header>
+<main>
+    <h1 th:text="${user.getUsername()}"></h1>
+    <section>
+        <h2 th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h2>
+        <p th:text="${user.getBio()}"></p>
+    </section>
+
+    <section id="posts">
+        <article th:each="post : ${posts}">
+            <h3 th:text="${post.getPoster()}"></h3>
+            <h4 th:text="${post.getCreatedAt()}"></h4>
+            <p th:text="${post.getBody()"></p>
+        </article>
+    </section>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

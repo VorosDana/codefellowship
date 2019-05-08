@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<head th:fragment="header">
+    <link th:ref="@{/style.css}" rel="stylesheet" type="text/css">
+</head>
+
+<nav th:fragment="navbar">
+    <h2>Code Fellowship</h2>
+    <div th:if="${user != null}">
+        <a th:href="@{/userpanel}"><span th:text="${user.getUsername()}"></span></a>
+    </div>
+    <div th:if="${user == null}">
+        <a th:href="@{/signup}">Sign Up</a>
+        <a th:href="@{/login}">Log In</a>
+    </div>
+</body>
+</html>
