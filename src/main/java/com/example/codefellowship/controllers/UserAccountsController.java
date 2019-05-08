@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/")
 public class UserAccountsController {
     @Autowired
     ApplicationUserRepository userRepository;
@@ -45,6 +46,16 @@ public class UserAccountsController {
         userRepository.save(user);
 
         return new RedirectView("/");
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("")
+    public String getSplashPage() {
+        return "splash";
     }
 
     @GetMapping("/users/{userId}")
