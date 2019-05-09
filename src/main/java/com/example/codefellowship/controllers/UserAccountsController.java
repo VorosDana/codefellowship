@@ -98,6 +98,10 @@ public class UserAccountsController {
     public String getUserPanel(@AuthenticationPrincipal ApplicationUser user, Model model) {
         ApplicationUser intermediary = userRepository.findByUsername(user.getUsername());
 
+        List<ApplicationUser> otherUsers = userRepository.findAll();
+        otherUsers.remove(intermediary);
+
+        model.addAttribute("otherUsers", otherUsers);
         model.addAttribute("user", intermediary);
 //        List posts = user.getPosts();
         model.addAttribute("posts", intermediary.getPosts());

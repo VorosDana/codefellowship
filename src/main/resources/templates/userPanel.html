@@ -22,6 +22,18 @@
             <p th:text="${post.getBody()"></p>
         </article>
     </section>
+
+    <section id="follow-recs">
+        <div th:each="person : ${otherUsers}">
+            <form th:action="'/follow/'" method="post">
+                <input name="followTargetName" type="text" th:value="${person.getUsername()}" hidden/>
+                <h3 th:text="${person.getFirstName() + ' ' + person.getLastName()}"/>
+                <h4 th:text="${person.getUsername()}"/>
+                <button type="submit" th:text="'Follow ' + ${person.getUsername()}"/>
+            </form>
+        </div>
+    </section>
+
 </main>
 <footer>
 
