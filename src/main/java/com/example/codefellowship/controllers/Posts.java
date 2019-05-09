@@ -24,12 +24,15 @@ public class Posts {
     @GetMapping("/{postId}")
     public String getPostDetails(@PathVariable long postId,
                                  Model model) {
+        Post post = postRepo.getOne(postId);
+        model.addAttribute("post", post);
+
         return "postDetails";
     }
 
     @PostMapping("")
     public RedirectView createPost(@RequestParam String body,
-                                   @RequestParam ApplicationUser poster) {
+                                   @AuthenticationPrincipal ApplicationUser poster) {
         Post post = new Post();
         post.setBody(body);
         post.setPoster(poster);
@@ -37,7 +40,7 @@ public class Posts {
         post.setCreatedAt(new Date());
         post = postRepo.save(post);
 
-        return new RedirectView("/posts/" + post.getId());
+        return new RedirectView("/feed");
     }
 
     @DeleteMapping("/{postId}")

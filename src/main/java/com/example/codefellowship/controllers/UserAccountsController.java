@@ -4,6 +4,7 @@ import com.example.codefellowship.UserNotFoundException;
 import com.example.codefellowship.database.ApplicationUser;
 import com.example.codefellowship.database.ApplicationUserRepository;
 import com.example.codefellowship.database.PostRepository;
+import com.example.codefellowship.database.UserFollow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -97,9 +98,16 @@ public class UserAccountsController {
     @GetMapping("/userpanel")
     public String getUserPanel(@AuthenticationPrincipal ApplicationUser user, Model model) {
         ApplicationUser intermediary = userRepository.findByUsername(user.getUsername());
+        List<UserFollow> intermediaryFollows = intermediary.getUsersFollowed();
+
 
         List<ApplicationUser> otherUsers = userRepository.findAll();
         otherUsers.remove(intermediary);
+        otherUsers.removeAll(intermediary.getUsersFollowed());
+
+        for (UserFollow follow : intermediaryFollows) {
+            otherUsers.remove(follow.getUserTo());
+        }
 
         model.addAttribute("otherUsers", otherUsers);
         model.addAttribute("user", intermediary);

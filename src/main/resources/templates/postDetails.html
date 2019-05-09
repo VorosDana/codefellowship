@@ -15,21 +15,6 @@
         <p th:text="${user.getBio()}"></p>
     </section>
 
-    <div id="post-form">
-        <form action="/posts" method="post">
-            <textarea name="body" rows="5" cols="100"> </textarea>
-            <button type="submit">Post</button>
-        </form>
-    </div>
-
-    <section id="posts">
-        <article th:each="post : ${posts}">
-            <h3 th:text="${post.getPoster().getUsername()   }"></h3>
-            <h4 th:text="${post.getCreatedAt()}"></h4>
-            <p th:text="${post.getBody()}"></p>
-        </article>
-    </section>
-
     <section id="follow-recs">
         <div th:each="person : ${otherUsers}">
             <form th:action="'/follow/'" method="post">
