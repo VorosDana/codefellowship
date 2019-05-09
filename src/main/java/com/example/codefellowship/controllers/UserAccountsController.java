@@ -28,12 +28,17 @@ public class UserAccountsController {
     PasswordEncoder encoder;
 
     @GetMapping("/signup")
-    public String getSignup() {
+    public String getSignup(@AuthenticationPrincipal ApplicationUser user) {
+        if (user != null) {
+            return "redirect:/feed";
+        }
+
         return "signup";
     }
 
     @PostMapping("/signup")
     public RedirectView performSignup(
+            @AuthenticationPrincipal ApplicationUser currentUser,
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String firstName,
@@ -41,6 +46,15 @@ public class UserAccountsController {
             @RequestParam String dateOfBirth,
             @RequestParam String bio
     ) {
+        if (currentUser != null) {
+            return new RedirectView("/feed");
+        }
+
+        ApplicationUser testCase = userRepository.findByUsername(username);
+        if (testCase != null) {
+            return new RedirectView("/feed");
+        }
+
         ApplicationUser user = new ApplicationUser();
         user.setUsername(username);
         user.setPassword(encoder.encode(password));
@@ -48,14 +62,16 @@ public class UserAccountsController {
         user.setLastName(lastName);
         user.setDateOfBirth(dateOfBirth);
         user.setBio(bio);
-
         userRepository.save(user);
 
         return new RedirectView("/");
     }
 
     @GetMapping("/login")
-    public String getLoginPage() {
+    public String getLoginPage(@AuthenticationPrincipal ApplicationUser user) {
+        if (user != null) {
+            return "redirect:/feed";
+        }
         return "login";
     }
 

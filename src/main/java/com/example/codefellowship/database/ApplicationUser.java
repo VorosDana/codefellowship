@@ -122,4 +122,20 @@ public class ApplicationUser implements UserDetails {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+    public List<UserFollow> getUsersFollowed() {
+        return usersFollowed;
+    }
+
+    public void setUsersFollowed(List<UserFollow> usersFollowed) {
+        this.usersFollowed = usersFollowed;
+    }
+
+    public List<UserFollow> getUsersFollowedBy() {
+        return usersFollowedBy;
+    }
+
+    public void setUsersFollowedBy(List<UserFollow> usersFollowedBy) {
+        this.usersFollowedBy = usersFollowedBy;
+    }
 }

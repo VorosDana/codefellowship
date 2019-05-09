@@ -16,7 +16,7 @@ public class Post {
     private Date createdAt;
 
     @ManyToOne
-    public ApplicationUser poster;
+    private ApplicationUser poster;
 
     public String getBody() {
         return body;
