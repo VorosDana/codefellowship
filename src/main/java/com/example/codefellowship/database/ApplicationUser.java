@@ -25,6 +25,12 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "poster")
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "userFrom")
+    private List<UserFollow> usersFollowed;
+
+    @OneToMany(mappedBy = "userTo")
+    private List<UserFollow> usersFollowedBy;
+
     @java.lang.Override
 
     public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
