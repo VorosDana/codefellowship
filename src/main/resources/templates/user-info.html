@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>User Info</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
 <header>
@@ -11,12 +11,18 @@
 <main>
 
     <p th:text="'Username:' + ${user.username}"/>
-    <p th:text="'Password:' + ${user.password}"/>
     <p th:text="'First Name:' + ${user.firstName}"/>
     <p th:text="'Last Name:' + ${user.lastName}"/>
     <p th:text="'Date of Birth:' + ${user.dateOfBirth}"/>
     <p th:text="'Bio:' + ${user.bio}"/>
 
+    <section id="posts">
+        <article th:each="post : ${user.getPosts()}">
+            <h3 th:text="${post.getPoster().getUsername()   }"></h3>
+            <h4 th:text="${post.getCreatedAt()}"></h4>
+            <p th:text="${post.getBody()}"></p>
+        </article>
+    </section>
 
 </main>
 <footer>

@@ -2,17 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Code Fellowship</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <header>
     <div th:replace="~{common :: navbar}"></div>
 </header>
 <main>
-    <h1 th:text="${user.getUsername()}"></h1>
+    <h1 th:text="${post.getPoster().getUsername()}"></h1>
     <section id="user-info">
-        <h2 th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h2>
-        <p th:text="${user.getBio()}"></p>
+        <h2 th:text="${post.getPoster().getFirstName() + ' ' + user.getLastName()}"></h2>
+        <p th:text="${post.getPoster().getBio()}"></p>
     </section>
 
     <section id="follow-recs">

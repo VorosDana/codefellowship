@@ -3,18 +3,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<head th:fragment="header">
-    <link th:ref="@{/style.css}" rel="stylesheet" type="text/css">
+<head th:fragment="styling">
+    <link th:href="@{/reset.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/style.css}" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <nav th:fragment="navbar">
     <h2>Code Fellowship</h2>
     <div th:if="${user != null}">
-        <a th:href="@{/userpanel}"><span th:text="${user.getUsername()}"></span></a>
+        <a th:href="@{/feed}">Home</a>
+        <a th:href="@{/userpanel}">User Panel</a>
+        <a th:href="@{/perform_logout}">Log Out</a>
+
     </div>
     <div th:if="${user == null}">
         <a th:href="@{/signup}">Sign Up</a>
         <a th:href="@{/login}">Log In</a>
     </div>
+</nav>
 </body>
 </html>

@@ -53,7 +53,7 @@ public class UserAccountsController {
 
         ApplicationUser testCase = userRepository.findByUsername(username);
         if (testCase != null) {
-            return new RedirectView("/feed");
+            return new RedirectView("/login");
         }
 
         ApplicationUser user = new ApplicationUser();
@@ -78,6 +78,10 @@ public class UserAccountsController {
 
     @GetMapping("")
     public String getSplashPage(@AuthenticationPrincipal ApplicationUser user, Model model) {
+        if (user != null) {
+            return "redirect:/feed";
+        }
+
         model.addAttribute("user", user);
 
         return "splash";
