@@ -24,16 +24,19 @@ public class FeedController {
 
         @Override
         public int compare(Post postA, Post postB) {
-            if (postA.getCreatedAt().equals(postB.getCreatedAt())) {
-                return 0;
-            }
-
-            if (postA.getCreatedAt().before(postB.getCreatedAt())) {
-                return 1;
-            } else {
-                return -1;
-            }
-
+            return postB
+                    .getCreatedAt()
+                    .compareTo(postA.getCreatedAt());
+//            if (postA.getCreatedAt().equals(postB.getCreatedAt())) {
+//                return 0;
+//            }
+//
+//            if (postA.getCreatedAt().before(postB.getCreatedAt())) {
+//                return 1;
+//            } else {
+//                return -1;
+//            }
+//
 
         }
     }
@@ -41,22 +44,28 @@ public class FeedController {
     @GetMapping("")
     public String getFeed(@AuthenticationPrincipal ApplicationUser user,
                           Model model) {
-        ApplicationUser openSessionUser = userRepo.getOne(user.getId());
-        List<UserFollow> following = openSessionUser.getUsersFollowed();
-        List<Post> posts = openSessionUser.getPosts();
-        for (UserFollow follow : following) {
-            ApplicationUser followTarget = userRepo.getOne(follow.getUserTo().getId());
+        if (user != null) {
 
-            List<Post> followTargetPosts = followTarget.getPosts();
-            posts.addAll(followTargetPosts);
+
+            ApplicationUser openSessionUser = userRepo.getOne(user.getId());
+            List<UserFollow> following = openSessionUser.getUsersFollowed();
+            List<Post> posts = openSessionUser.getPosts();
+            for (UserFollow follow : following) {
+                ApplicationUser followTarget = userRepo.getOne(follow.getUserTo().getId());
+
+                List<Post> followTargetPosts = followTarget.getPosts();
+                posts.addAll(followTargetPosts);
+            }
+
+            // TODO: posts sorting via comparator
+            posts.sort(new PostDateComparator());
+
+            model.addAttribute("posts", posts);
+            model.addAttribute("user", openSessionUser);
+            return "feed";
         }
 
-        // TODO: posts sorting via comparator
-        posts.sort(new PostDateComparator());
-
-        model.addAttribute("posts", posts);
-
-        return "feed";
+        return "redirect:/";
     }
 }
 

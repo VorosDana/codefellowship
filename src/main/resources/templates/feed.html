@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Code Fellowship</title>
+</head>
+<body>
+<header>
+    <div th:replace="~{common :: navbar}"></div>
+</header>
+<main>
+    <h1 th:text="${user.getUsername()}"></h1>
+    <section id="user-info">
+        <h2 th:text="${user.getFirstName() + ' ' + user.getLastName()}"></h2>
+        <p th:text="${user.getBio()}"></p>
+    </section>
+
+    <div id="post-form">
+        <form action="/posts" method="post">
+            <textarea name="body" rows="5" cols="100"> </textarea>
+            <button type="submit">Post</button>
+        </form>
+    </div>
+
+    <section id="posts">
+        <article th:each="post : ${posts}">
+            <h3 th:text="${post.getPoster().getUsername()}"></h3>
+            <h4 th:text="${post.getCreatedAt()}"></h4>
+            <p th:text="${post.getBody()}"></p>
+        </article>
+    </section>
+
+    <section id="follow-recs">
+        <div th:each="person : ${otherUsers}">
+            <form th:action="'/follow/'" method="post">
+                <input name="followTargetName" type="text" th:value="${person.getUsername()}" hidden/>
+                <h3 th:text="${person.getFirstName() + ' ' + person.getLastName()}"/>
+                <h4 th:text="${person.getUsername()}"/>
+                <button type="submit" th:text="'Follow ' + ${person.getUsername()}"/>
+            </form>
+        </div>
+    </section>
+
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

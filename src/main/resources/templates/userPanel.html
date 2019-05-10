@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Code Fellowship</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:replace="~{common :: styling}"/>
 </head>
 <body>
 <header>
@@ -15,12 +15,12 @@
         <p th:text="${user.getBio()}"></p>
     </section>
 
-    <div id="post-form">
-        <form action="/posts" method="post">
-            <textarea name="body" rows="5" cols="100"> </textarea>
-            <button type="submit">Post</button>
-        </form>
-    </div>
+    <!--    <div id="post-form">-->
+    <!--        <form action="/posts" method="post">-->
+    <!--            <textarea name="body" rows="5" cols="100"> </textarea>-->
+    <!--            <button type="submit">Post</button>-->
+    <!--        </form>-->
+    <!--    </div>-->
 
     <section id="posts">
         <article th:each="post : ${posts}">
